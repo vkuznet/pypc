@@ -88,6 +88,48 @@ To run tests : python setup.py test
 """
     return msg
 
+def create_test_t(package):
+    "Create simple unit test example"
+    doc = """#!/usr/bin/env python
+#pylint: disable-msg=c0301,c0103
+
+'''
+unit test example
+'''
+
+import sys
+import unittest
+
+def fail_function(value):
+    return 1./value
+
+class testExample(unittest.TestCase):
+    "A test class"
+    def setUp(self):
+        "set up"
+        # some stuff to init for this class
+        pass
+
+    def test_equal(self):
+        "Test assertEqual"
+        expect = 1
+        result = 1
+        self.assertEqual(expect, result)
+
+    def test_exception(self):
+        "Test assertException"
+        self.assertRaises(Exception, fail_function, 0)
+#
+# main
+#
+if __name__ == '__main__':
+    unittest.main()
+"""
+    with working_dir(package):
+        with working_dir('tests'):
+            with open('test_t.py', 'w') as test:
+                test.write(doc)
+
 def create_setup_py(package, author, ver):
     "Create setup.py of given package"
     doc = """#!/usr/bin/env python
@@ -359,6 +401,7 @@ def main():
 
     create_dir_structure(opts.package, opts.author, opts.version)
     create_setup_py(opts.package, opts.author, opts.version)
+    create_test_t(opts.package)
     print
     print "Your package structure has been created"
     print "Package :", opts.package

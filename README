@@ -1,0 +1,72 @@
+Introduction:
+-------------
+
+How many times you created a python project, if your answer is plenty, then
+you probably tired to create desired infrastructre over and over.
+So pypc (Python Project Creator) is a way to go. It creates
+full directory structure, including test suit, docs and project python
+setup.py for your convenience. You only need to fill out the project
+with your code.
+
+Usage:
+------
+
+Usage: create_package.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  -p PACKAGE, --package=PACKAGE
+                        specify package name
+  -a AUTHOR, --author=AUTHOR
+                        specify author name
+  -v VERSION, --version=VERSION
+                        specify initial version name/number
+
+Example:
+--------
+
+./create_package.py -p TestPackage -a FirstLastName
+Sphinx is detected, will generate docs
+sphinx-apidoc -F -H TestPackage -A FirstLastName -V development -o sphinx /Users/vk/Work/Python/GIT/pypc/TestPackage
+Creating file sphinx/conf.py.
+Creating file sphinx/index.rst.
+Creating file sphinx/Makefile.
+Creating file sphinx/make.bat.
+Created TestPackage directory structure
+Created TestPackage/setup.py
+
+Your package structure has been created
+Package : TestPackage
+Author  : FirstLastName
+Version : development
+
+Here is a list of usefull commands:
+
+To build     : python setup.py build
+To install   : python setup.py install --prefix=<some dir>
+To clean     : python setup.py clean
+To build doc : python setup.py doc
+To run tests : python setup.py test
+
+output of tree command:
+
+TestPackage/
+├── bin
+├── doc
+│   └── sphinx
+│       ├── Makefile
+│       ├── _build
+│       ├── _static
+│       ├── _templates
+│       ├── conf.py
+│       ├── index.rst
+│       └── make.bat
+├── etc
+├── setup.py
+├── src
+│   └── python
+│       └── TestPackage
+│           └── __init__.py
+└── tests
+    └── test_t.py
+

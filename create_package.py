@@ -53,7 +53,7 @@ def create_dir_structure(package, author, ver):
         sys.exit(1)
     os.makedirs(package)
     path = os.path.join(os.getcwd(), package)
-    cmd  = "sphinx-apidoc -F -H %(package)s -A %(author)s -V %(version)s -o sphinx %(path)s" \
+    cmd  = "sphinx-apidoc -F -H %(package)s -A '%(author)s' -V %(version)s -o sphinx %(path)s" \
             % {'package': package, 'author': author, 'version': ver, 'path': path}
     # determine if system is equipped with sphinx
     res = subprocess.Popen('type sphinx-apidoc', shell=True, stdout=subprocess.PIPE)
@@ -68,6 +68,10 @@ def create_dir_structure(package, author, ver):
             with open('__init__.py', 'w') as init:
                 doc = '__author__ = "%s"' % author
                 init.write(doc)
+        # tests area
+        with open('tests/__init__.py', 'w') as init:
+            doc = '__author__ = "%s"' % author
+            init.write(doc)
         # doc area
         if  sphinx:
             print "Sphinx is detected, will generate docs"
